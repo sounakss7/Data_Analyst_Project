@@ -1,0 +1,11 @@
+NayePankh Foundation - Simple Data Analysis Report
+===================================================
+Total Beneficiaries: 1000
+Overall Completion Rate: 74.70%
+Total Funds Utilized: 11,068,587.85 INR
+Average Satisfaction Score: 2.92 / 5.0
+
+Key Findings:
+1. Enrollment levels have grown steadily from 2022 to 2025.
+2. Individual and Corporate donors represent the main sources of sponsored funding.
+3. Program satisfaction scores average positive ratings across all courses.
