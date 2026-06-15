@@ -67,11 +67,30 @@ def main():
     # Simple Visualizations
     sns.set_theme(style="whitegrid")
     
-    # Chart 1: Enrollment Trend
-    plt.figure(figsize=(6, 4))
-    df.groupby("Enrollment Year").size().plot(kind="line", marker="o", color="orange")
-    plt.title("Enrollment Trend (2022-2025)")
-    plt.ylabel("Count")
+    # Chart 1: Enrollment Trend & Simple Linear Forecast for 2026
+    plt.figure(figsize=(7, 4))
+    growth_df = df.groupby("Enrollment Year").size().reset_index(name="Count")
+    
+    # Trend line math: y = mx + c
+    x = growth_df["Enrollment Year"].values
+    y = growth_df["Count"].values
+    slope, intercept = np.polyfit(x, y, 1)
+    
+    # Forecast for 2026
+    x_forecast = np.append(x, 2026)
+    y_forecast = slope * x_forecast + intercept
+    forecast_2026 = int(round(y_forecast[-1]))
+    
+    # Plot original data
+    plt.plot(x, y, marker="o", color="orange", label="Actual Enrollments", linewidth=2)
+    # Plot forecasted data (dashed line)
+    plt.plot(x_forecast[-2:], y_forecast[-2:], linestyle="--", marker="o", color="red", label="2026 Linear Forecast")
+    
+    plt.title("Enrollment Growth & 2026 Linear Trend Projection")
+    plt.xlabel("Year")
+    plt.ylabel("Registrations")
+    plt.xticks(x_forecast)
+    plt.legend()
     plt.tight_layout()
     plt.savefig("visualizations/enrollment_trend.png")
     plt.close()
@@ -108,15 +127,16 @@ Overall Completion Rate: {overall_completion:.2f}%
 Total Funds Utilized: {total_spent:,.2f} INR
 Average Satisfaction Score: {avg_satisfaction:.2f} / 5.0
 
-Key Findings:
+Advanced Analytical Insights:
 1. Enrollment levels have grown steadily from 2022 to 2025.
-2. Individual and Corporate donors represent the main sources of sponsored funding.
-3. Program satisfaction scores average positive ratings across all courses.
+2. 2026 Enrollment Projection (Linear regression fit): {forecast_2026} expected students.
+3. Individual and Corporate donors represent the main sources of sponsored funding.
+4. Program satisfaction scores average positive ratings across all courses.
 """
     with open("report.txt", "w") as f:
         f.write(report_text)
         
-    print("Simple analysis pipeline completed successfully.")
+    print("Simple analysis pipeline with trend forecasting completed successfully.")
 
 if __name__ == "__main__":
     main()

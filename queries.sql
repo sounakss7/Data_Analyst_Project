@@ -47,3 +47,16 @@ SELECT
 FROM ngo_data
 GROUP BY "State"
 ORDER BY total_students DESC;
+
+
+-- 6. Program Share of Total NGO Spend (Common Table Expression - CTE)
+WITH Total_NGO_Spend AS (
+    SELECT SUM("Funds Utilized") AS overall_spent FROM ngo_data
+)
+SELECT 
+    "Program Category",
+    SUM("Funds Utilized") AS category_spent,
+    ROUND((SUM("Funds Utilized") / (SELECT overall_spent FROM Total_NGO_Spend)) * 100, 2) AS spending_share_pct
+FROM ngo_data
+GROUP BY "Program Category"
+ORDER BY spending_share_pct DESC;
