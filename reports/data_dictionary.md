@@ -86,7 +86,7 @@ To enhance analysis, the following calculated columns are created in processing:
     *   *Formula*: `CASE WHEN Age < 25 THEN 'Youth (15-24)' WHEN Age < 45 THEN 'Adult (25-44)' ELSE 'Mature (45+)' END`
     *   *Business Logic*: Demographic segmentation to tailor program outreach.
 3.  **Completion Success Score (`completion_success`)**:
-    *   *Formula*: Boolean value (1 if `Completed`, 0 otherwise). Used as target variable in logistic regression.
+    *   *Formula*: Boolean value (1 if `Completed`, 0 otherwise). Used for calculating program completion rates.
 4.  **Employment Conversion Rate (`employment_rate`)**:
     *   *Formula*: `Total Employed Beneficiaries / Total Beneficiaries Enrolled in Employment-seeking Programs` (Skill Dev and Digital Literacy).
 5.  **Retention Category (`engagement_level`)**:

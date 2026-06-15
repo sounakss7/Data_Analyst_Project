@@ -25,11 +25,11 @@ Using a weighted index combining program completion rates (30%), post-training e
 4.  **Education Support (Score: 65.5)**: Exceptionally high completion rates (89.5%), but has lower direct employment outcomes (standard for general education).
 5.  **Health Awareness (Score: 61.1)**: Short duration, high volume outreach, but scores lower on long-term impact metrics.
 
-### B. Core Drivers of Program Completion
-Our random forest predictive model identified the primary variables influencing program completion:
-*   **Attendance Percentage (Feature Importance: 46%)**: The single most significant driver. Beneficiaries who maintain attendance above **80%** have a **93% probability** of completion. When attendance drops below **65%**, the dropout rate rises to **70%**.
-*   **Volunteer Count per Batch (Importance: 18%)**: Increased volunteer-to-beneficiary ratios directly correlate with higher attendance and satisfaction.
-*   **Satisfaction Score (Importance: 12%)**: Low satisfaction scores (1-2 stars) in the first half of a program serve as an early indicator of drop-out risk.
+### B. Core Factors Influencing Program Completion
+Our data correlation and descriptive analysis identified the primary factors linked to program completion:
+*   **Attendance Percentage**: The single most significant factor. Beneficiaries who maintain attendance above **80%** have a **93% completion rate**. When attendance drops below **65%**, the dropout rate rises to **70%**.
+*   **Volunteer Mobilization**: Higher numbers of volunteers per program batch show a direct positive correlation with both attendance levels and final satisfaction scores.
+*   **Satisfaction Score**: Low satisfaction scores (1-2 stars) serve as a clear early indicator of drop-out risk.
 
 ### C. Financial Auditing & Budget Efficiency
 *   **Optimal Allocation**: Overall fund utilization efficiency is high at **93.3%**. We observed no systemic budget leakage.
