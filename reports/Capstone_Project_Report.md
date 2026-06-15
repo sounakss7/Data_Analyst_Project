@@ -19,7 +19,7 @@ NayePankh Foundation is a non-governmental organization (NGO) operating in India
 *   Implement data cleaning methods in Python to handle missing values, duplicates, and correct invalid entries.
 *   Analyze key indicators such as program completion rates, session attendance, and post-program employment success.
 *   Identify donor contribution patterns to optimize sponsorship models.
-*   Develop a blueprint for a Power BI dashboard to present key insights to management.
+*   Develop analytical insights to present to management.
 
 ---
 

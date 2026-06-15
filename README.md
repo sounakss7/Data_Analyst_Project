@@ -24,7 +24,6 @@ Data_Analyst_Project/
 │   └── NayePankh_NGO_Analysis.ipynb # Capstone Jupyter Notebook for interactive run
 ├── reports/
 │   ├── data_dictionary.md           # Attribute definitions and data types
-│   ├── PowerBI_Design.md            # Dashboard layouts and DAX formulas
 │   └── Capstone_Project_Report.md   # Final capstone project report write-up
 └── README.md                        # Portfolio landing page (This file)
 ```
@@ -68,58 +67,11 @@ Our analysis shows optimal utilization rates of 85-90% of the allocated budget a
 
 ---
 
-## 📊 Power BI Dashboard Specifications & Visual Mockups
+## 📈 Executive Summary Recommendations
+Detailed analysis from the dataset suggests four primary strategic initiatives:
+1.  **Early Intervention System**: Set weekly attendance flags for any beneficiary dropping below 75% attendance to proactively prevent drop-outs.
+2.  **Volunteer Allocation**: Distribute volunteers to target a **1:8 volunteer-to-student ratio** in Skill Development courses to maximize program satisfaction.
+3.  **CSR Partnership Pitch**: Leverage the employment success rate of the Digital Literacy program to solicit corporate sponsors in tech-heavy Indian cities.
+4.  **Individual Donor Conversion**: Transition one-off donors to monthly micro-donors via recurring sponsorships.
 
-The proposed dashboard layout is documented in [reports/PowerBI_Design.md](reports/PowerBI_Design.md) and features visual mockups for executive decision support:
-
-### Page 1: Executive Overview
-Provides leadership with key metrics, growth lines, and category donut splits.
-![Executive Overview](visualizations/power_bi_executive_overview.png)
-
-### Page 2: Financial Analytics
-Highlights budget allocations vs utilization spends and donor pie shares.
-![Financial Overview](visualizations/power_bi_financial_analytics.png)
-
-### Page 3: Impact Assessment
-Maps geographical outreach and job placement success rates.
-![Impact Assessment](visualizations/power_bi_impact_assessment.png)
-
----
-
-## 💻 How to Load & View in Power BI Desktop
-
-To recreate or inspect the dashboard on your local machine using Power BI Desktop, follow these options:
-
-### Option A: Using the Cleaned CSV (Recommended)
-1.  **Open Power BI Desktop**.
-2.  On the **Home** ribbon, click **Get Data** -> **Text/CSV**.
-3.  Navigate to this repository's folder and select:  
-    `data/cleaned_ngo_data.csv`
-4.  Click **Load** to import.
-
-### Option B: Connecting directly to SQLite DB (Direct Query / Import)
-1.  On the **Home** ribbon, click **Get Data** -> **Blank Query**.
-2.  Click the **Advanced Editor** and paste the following M-code, substituting `c:/path_to_project/` with your local absolute repository path:
-    ```powerquery
-    let
-        Source = Sqlite.Database("c:/path_to_project/Data_Analyst_Project/data/naye_pankh_ngo.db"),
-        enrollments = Source{[Name="enrollments"]}[Data]
-    in
-        enrollments
-    ```
-3.  Click **Done** to load the tables.
-
-### Option C: Implementing the DAX KPI Measures
-Right-click your loaded data table in Power BI, select **New Measure**, and paste these calculations:
-*   **Total Beneficiaries**:
-    ```dax
-    Total Beneficiaries = DISTINCTCOUNT(cleaned_ngo_data[Beneficiary ID])
-    ```
-*   **Completion Rate %**:
-    ```dax
-    Completion Rate % = 
-    VAR CompletedCount = CALCULATE(COUNT(cleaned_ngo_data[Beneficiary ID]), cleaned_ngo_data[Program Completion Status] = "Completed")
-    VAR TotalEvaluated = CALCULATE(COUNT(cleaned_ngo_data[Beneficiary ID]), cleaned_ngo_data[Program Completion Status] IN {"Completed", "Dropped Out"})
-    RETURN
-    DIVIDE(CompletedCount, TotalEvaluated, 0) * 100
-    ```
+*For the complete detailed brief, refer to [reports/Capstone_Project_Report.md](reports/Capstone_Project_Report.md).*
