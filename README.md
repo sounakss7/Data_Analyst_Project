@@ -1,18 +1,8 @@
-# NayePankh Foundation - Data Analytics & Impact Assessment Project
+# NayePankh Foundation - Data Analytics Project
 
-An end-to-end Data Analytics, Business Intelligence, and Predictive Modeling solution demonstrating how data-driven workflows optimize outreach, volunteer allocation, and funding strategies for **NayePankh Foundation** (a prominent Indian NGO focused on education, skill development, and social welfare).
+This repository contains a complete Data Analytics portfolio project designed to analyze the impact, outreach, and operational efficiency of **NayePankh Foundation** (an Indian NGO focused on education, skill development, and social welfare). 
 
----
-
-## 🚀 Project Architecture & Workflow
-This repository models a complete real-world BI lifecycle:
-1.  **Synthetic Data Engine**: Generates 5 years (2021-2025) of realistic NGO operations data (6,200+ records) and normalizes it into a relational SQLite database.
-2.  **Data Quality Pipeline**: Conducts missing value imputation, duplicate removal, outlier capping, and validation checks.
-3.  **Relational Database Engine**: Hosts schema DDL and executes complex window/aggregation queries for key reporting KPIs.
-4.  **Exploratory Data Analysis**: Performs visualization trends using Seaborn & Matplotlib.
-5.  **Advanced Analytics**: Computes Quarterly Cohort Retention, builds a Program Effectiveness Score (PES) Index, and trains a Random Forest Classifier to predict employment outcomes.
-6.  **Automated reporting**: Compiles automated markdown performance briefs comparing QoQ quarterly metrics.
-7.  **Power BI Dashboard Design**: Details a comprehensive 5-page business layout with copy-pasteable DAX measures.
+The project demonstrates capabilities in Python (data cleaning, feature engineering, and exploratory analysis), SQL (database schemas and reporting queries), and Power BI (dashboard layouts and DAX measures).
 
 ---
 
@@ -20,25 +10,25 @@ This repository models a complete real-world BI lifecycle:
 ```text
 Data_Analyst_Project/
 ├── data/
-│   ├── raw_ngo_data.csv             # Raw generated synthetic dataset
-│   ├── cleaned_ngo_data.csv         # Cleaned and processed dataset
+│   ├── raw_ngo_data.csv             # Raw generated synthetic dataset (6,200+ rows)
+│   ├── cleaned_ngo_data.csv         # Cleaned, validated, and processed dataset
 │   └── naye_pankh_ngo.db            # Normalized SQLite relational database
 ├── src/
-│   ├── generate_data.py             # Python script for generating flat/relational data
-│   ├── process_data.py              # Cleaning pipeline, outlier capping, and validations
-│   ├── eda_analysis.py              # Visual trend generators (saves png plots)
-│   └── advanced_analytics.py        # ML modeling, cohort analytics, and PES calculations
-│   └── generate_reports.py          # Auto-generator of monthly/quarterly briefs
+│   ├── generate_data.py             # Python script to generate synthetic operations data
+│   ├── process_data.py              # Data cleaning, missing values, and outlier pipeline
+│   ├── eda_analysis.py              # Exploratory plotting script (generates PNG charts)
+│   └── advanced_analytics.py        # Python cohort metrics and program scores calculator
 ├── sql/
-│   ├── schema.sql                   # SQL schema definition for normalized tables
-│   └── queries.sql                  # Complex analytical SQL queries (CTEs, Window Functions)
+│   ├── schema.sql                   # Database DDL script for relational tables
+│   └── queries.sql                  # Analytical SQL queries (joins and group-by aggregates)
 ├── notebooks/
-│   └── eda_notebook.ipynb           # Jupyter Notebook for interactive exploration
+│   └── eda_notebook.ipynb           # Jupyter Notebook for interactive data exploration
 ├── reports/
-│   ├── executive_summary.md         # High-level strategic briefing and recommendations
-│   ├── data_dictionary.md           # Schema details and business definitions
-│   ├── power_bi_design.md           # Dashboard blueprints, layouts, & DAX measures
-│   └── monthly_report_Q4_2025.md    # Sample automated reporting output
+│   ├── data_dictionary.md           # Schema details, descriptions, and business definitions
+│   ├── power_bi_design.md           # Visual mockups, layouts, and copy-pasteable DAX measures
+│   ├── executive_summary.md         # Strategic briefing and management recommendations
+│   └── cohort_analysis.csv          # Pre-computed yearly cohort metrics
+│   └── program_effectiveness_scores.csv # Pre-calculated program score index
 ├── visualizations/                  # Directory containing generated charts
 │   ├── beneficiary_growth.png       
 │   ├── program_enrollments.png      
@@ -50,17 +40,16 @@ Data_Analyst_Project/
 │   ├── employment_outcomes.png      
 │   ├── satisfaction_distribution.png
 │   ├── correlation_matrix.png       
-│   ├── feature_importance.png       
-│   ├── power_bi_executive_overview.png  # Visual mockup of Executive Overview page
-│   ├── power_bi_financial_analytics.png # Visual mockup of Finance page
-│   └── power_bi_impact_assessment.png   # Visual mockup of Impact Assessment page
+│   ├── power_bi_executive_overview.png  # Power BI Page 1 Screenshot
+│   ├── power_bi_financial_analytics.png # Power BI Page 3 Screenshot
+│   └── power_bi_impact_assessment.png   # Power BI Page 4 Screenshot
 └── README.md                        # Portfolio landing page (This file)
 ```
 
 ---
 
 ## 🗄️ Relational Database Schema
-The raw operations data is normalized into 3NF schema tables:
+The raw operations data is normalized into a clean, relational database schema:
 
 ```mermaid
 erDiagram
@@ -106,27 +95,23 @@ erDiagram
 ---
 
 ## 📊 Power BI Dashboard Specifications & Visual Mockups
-
-The portfolio-grade Power BI dashboard is designed around a unified charcoal theme with soft grid alignments, responsive cards, and vibrant gradients. Below are the design blueprints, key metrics, and visual mockups:
+The Power BI solution is structured into a multi-page interactive dashboard tailored for NGO operations auditing:
 
 ### Page 1: Executive Overview
-*   **Target Audience**: Executive Board & NGO Directors
-*   **KPI Metrics**: Total Beneficiaries (6,200), Completion Rate (89.0%), Funds Utilized (84.3M INR), Average Satisfaction Score (3.76/5).
-*   **Key Charts**: 5-Year Enrollment Growth Trend (Line Chart), Program Category Distribution (Donut Chart), and State-wise enrollment count (Bar Chart).
+*   **KPI Cards**: Total Beneficiaries (6,200), Completion Rate (89.0%), Funds Utilized (84.3M INR), Average Satisfaction Score (3.76/5).
+*   **Visual Charts**: 5-Year Enrollment Growth Trend (Line Chart), Program Category Distribution (Donut Chart), and State-wise enrollment count (Bar Chart).
 *   **Visual Mockup**:
     ![Power BI Executive Overview](visualizations/power_bi_executive_overview.png)
 
 ### Page 2: Financial Analytics & Budget Efficiency
-*   **Target Audience**: Finance Committee & Auditors
-*   **KPI Metrics**: Total Funds Allocated (90.3M INR), Total Funds Utilized (84.3M INR), Overall Fund Utilization Rate (93.3%).
-*   **Key Charts**: Clustered column charts comparing Allocated vs. Utilized budgets by category, and Donor Sponsorship Contribution Share (Pie Chart showing Corporate leading at 44.6%).
+*   **KPI Cards**: Total Funds Allocated (90.3M INR), Total Funds Utilized (84.3M INR), Overall Fund Utilization Rate (93.3%).
+*   **Visual Charts**: Clustered column charts comparing Allocated vs. Utilized budgets by category, and Donor Sponsorship Contribution Share (Pie Chart showing Corporate leading at 44.6%).
 *   **Visual Mockup**:
     ![Power BI Financial Analytics](visualizations/power_bi_financial_analytics.png)
 
 ### Page 3: Impact Assessment & Livelihood Conversion
-*   **Target Audience**: Program Managers & Outreach Partners
-*   **KPI Metrics**: Trainee Job-Securing Success Rate (53.8%), Female Diversity Share (55.0%), Average Satisfaction (3.76).
-*   **Key Charts**: Visual Map of India highlighting regional outreach, and Satisfaction Score distributions.
+*   **KPI Cards**: Trainee Job-Securing Success Rate (53.8%), Female Diversity Share (55.0%), Average Satisfaction (3.76).
+*   **Visual Charts**: Visual Map of India highlighting regional outreach, and Satisfaction Score distributions.
 *   **Visual Mockup**:
     ![Power BI Impact Assessment](visualizations/power_bi_impact_assessment.png)
 
@@ -139,7 +124,7 @@ Ensure Python 3.8+ is installed on your local environment.
 
 ### 1. Install Dependencies
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn
+pip install pandas numpy matplotlib seaborn
 ```
 
 ### 2. Generate and Build Datasets
@@ -155,23 +140,17 @@ python src/process_data.py
 ```
 
 ### 4. Run Exploratory Data Analysis & Advanced Modeling
-Generate the charts and run advanced analytics (Random Forest classification model, cohort matrix, program performance scoring):
+Generate the charts and run advanced analytics (yearly cohort matrix and program performance scoring):
 ```bash
 python src/eda_analysis.py
 python src/advanced_analytics.py
-```
-
-### 5. Generate Automated Report
-Compile the automated Q4 2025 performance report comparing QoQ metrics:
-```bash
-python src/generate_reports.py
 ```
 
 ---
 
 ## 📊 Performance Visualizations (Selected EDA Plots)
 
-Here are some key visual insights generated from the pipeline:
+Here are some key visual insights generated from the Python EDA script:
 
 ### Beneficiary Growth Over Time
 The foundation has expanded steadily over the past 5 years.
@@ -180,10 +159,6 @@ The foundation has expanded steadily over the past 5 years.
 ### Funds Allocated vs Utilized
 Operational financial transparency by category.
 ![Funds Allocation](visualizations/funds_allocation_vs_utilization.png)
-
-### Predictive Features for Employment
-A Random Forest model reveals that **Attendance Percentage** is the most critical factor in securing employment post-training.
-![Feature Importances](visualizations/feature_importance.png)
 
 ### Correlation Heatmap
 Interaction between key performance variables.
@@ -195,7 +170,7 @@ Interaction between key performance variables.
 Detailed analysis from the dataset suggests four primary strategic initiatives:
 1.  **Early Intervention System**: Set weekly attendance flags for any beneficiary dropping below 75% attendance to proactively prevent drop-outs.
 2.  **Volunteer Allocation**: Distribute volunteers to target a **1:8 volunteer-to-student ratio** in Skill Development courses to maximize program satisfaction.
-3.  **CSR Partnership Pitch**: Leverage the **39.93% employment success rate** of the Digital Literacy program to solicit corporate sponsors in tech-heavy Indian cities.
+3.  **CSR Partnership Pitch**: Leverage the employment success rate of the Digital Literacy program to solicit corporate sponsors in tech-heavy Indian cities.
 4.  **Individual Donor Conversion**: Transition one-off donors to monthly micro-donors via recurring sponsorships.
 
 *For the complete detailed brief, refer to [executive_summary.md](reports/executive_summary.md).*
