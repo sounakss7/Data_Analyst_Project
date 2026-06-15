@@ -67,13 +67,3 @@ JOIN beneficiaries b ON e.beneficiary_id = b.beneficiary_id
 JOIN programs p ON e.program_id = p.program_id
 GROUP BY b.state
 ORDER BY employment_success_pct DESC;
-
-
-SELECT 
-    STRFTIME('%Y', e.enrollment_date) AS enrollment_year,
-    COUNT(DISTINCT e.beneficiary_id) AS total_beneficiaries,
-    ROUND(SUM(d.monthly_donation_amount), 2) AS total_donations
-FROM enrollments e
-LEFT JOIN donations_donors d ON e.enrollment_id = d.enrollment_id
-GROUP BY enrollment_year
-ORDER BY enrollment_year;
