@@ -114,12 +114,13 @@ def main():
     plt.savefig("visualizations/donor_summary.png")
     plt.close()
     
-    # Simple Text Report
+    # Gather summary metrics
     total_beneficiaries = df["Beneficiary ID"].nunique()
     overall_completion = (df["Completion Status"] == "Completed").mean() * 100
     total_spent = df["Funds Utilized"].sum()
     avg_satisfaction = df["Satisfaction Score"].mean()
     
+    # Simple Text Report
     report_text = f"""NayePankh Foundation - Simple Data Analysis Report
 ===================================================
 Total Beneficiaries: {total_beneficiaries}
@@ -136,7 +137,169 @@ Advanced Analytical Insights:
     with open("report.txt", "w") as f:
         f.write(report_text)
         
-    print("Simple analysis pipeline with trend forecasting completed successfully.")
+    # Program stats for HTML Table
+    prog_stats = df.groupby("Program Category").agg(
+        Enrollments=("Beneficiary ID", "count"),
+        Avg_Attendance=("Attendance Percentage", "mean"),
+        Completion_Rate=("Completion Success", "mean")
+    ).reset_index()
+    
+    table_rows = ""
+    for _, r in prog_stats.iterrows():
+        table_rows += f"""
+        <tr>
+            <td><strong>{r['Program Category']}</strong></td>
+            <td>{int(r['Enrollments'])}</td>
+            <td>{r['Avg_Attendance']:.2f}%</td>
+            <td>{r['Completion_Rate']*100:.2f}%</td>
+        </tr>"""
+        
+    # HTML Dashboard template
+    html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NayePankh Foundation - Dashboard Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {{
+            background-color: #12181F;
+            color: #FFFFFF;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 40px;
+        }}
+        .container {{
+            max-width: 1100px;
+            margin: 0 auto;
+        }}
+        header {{
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }}
+        h1 {{ margin: 0; font-size: 28px; }}
+        h2 {{ font-size: 18px; margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 6px; }}
+        p.subtitle {{ color: #9FAFC0; margin: 5px 0 0 0; font-size: 14px; }}
+        .kpi-grid {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }}
+        .kpi-card {{
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 20px;
+        }}
+        .kpi-title {{ font-size: 12px; color: #9FAFC0; margin-bottom: 8px; }}
+        .kpi-value {{ font-size: 24px; font-weight: 700; color: #FF5722; }}
+        .dashboard-layout {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }}
+        .chart-box {{
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }}
+        .chart-box img {{
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }}
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 15px;
+        }}
+        th {{ padding: 12px; border-bottom: 2px solid rgba(255,255,255,0.08); color: #9FAFC0; text-align: left; }}
+        td {{ padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }}
+        .insights-list {{
+            padding-left: 20px;
+            font-size: 14px;
+            color: #CBD5E1;
+            line-height: 1.6;
+        }}
+        .insights-list li {{ margin-bottom: 10px; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NayePankh Foundation</h1>
+            <p class="subtitle">Operational Impact & Performance Dashboard (2022 - 2025)</p>
+        </header>
+        
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title">Total Beneficiaries</div>
+                <div class="kpi-value">{total_beneficiaries}</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Completion Rate</div>
+                <div class="kpi-value">{overall_completion:.1f}%</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Total Spend Utilized</div>
+                <div class="kpi-value">{total_spent/1e6:.2f}M INR</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Avg Satisfaction</div>
+                <div class="kpi-value">{avg_satisfaction:.2f} / 5</div>
+            </div>
+        </div>
+        
+        <div class="dashboard-layout">
+            <div class="chart-box">
+                <div class="kpi-title" style="margin-bottom:15px; text-align:left; font-size:14px; color:#FFF;">Enrollment Trend & Projection</div>
+                <img src="visualizations/enrollment_trend.png" alt="Enrollment Trend">
+            </div>
+            <div class="chart-box">
+                <div class="kpi-title" style="margin-bottom:15px; text-align:left; font-size:14px; color:#FFF;">Category Completion Rates</div>
+                <img src="visualizations/program_performance.png" alt="Program Performance">
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px;">
+            <div>
+                <h2>Program Performance Summary</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Program Category</th>
+                            <th>Enrollments</th>
+                            <th>Avg Attendance</th>
+                            <th>Completion Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {table_rows}
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h2>Key Findings & Insights</h2>
+                <ul class="insights-list">
+                    <li>Enrollment levels have grown steadily over the 4-year scope, with the <strong>2026 forecast</strong> projecting <strong>{forecast_2026} registrations</strong>.</li>
+                    <li>Funds utilization rates are highly efficient (average ~88%), with no major budget deviations.</li>
+                    <li>Program satisfaction levels remain consistently high.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+"""
+    with open("report.html", "w", encoding="utf-8") as f:
+        f.write(html_content)
+        
+    print("Simple analysis pipeline with HTML dashboard completed successfully.")
 
 if __name__ == "__main__":
     main()

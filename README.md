@@ -17,6 +17,7 @@ Data_Analyst_Project/
 ├── analysis.ipynb               # Jupyter Notebook for interactive run
 ├── queries.sql                  # Simple SQL queries (including a CTE query)
 ├── report.txt                   # Automated text-based summary report with 2026 forecasts
+├── report.html                  # Double-clickable local HTML visual dashboard report
 └── README.md                    # Project landing page (This file)
 ```
 
@@ -31,13 +32,17 @@ pip install pandas numpy matplotlib seaborn
 ```
 
 ### 2. Run Python Script
-Execute the analysis script to regenerate datasets, databases, and visualizations:
+Execute the analysis script to regenerate datasets, databases, visualizations, and the HTML dashboard:
 ```bash
 python analysis.py
 ```
 
-### 3. Run Jupyter Notebook
-Open [analysis.ipynb](analysis.ipynb) in your Jupyter notebook environment to interact with the code.
+### 3. Open Interactive Notebook
+To explore the analysis interactively, open:
+[analysis.ipynb](analysis.ipynb) in your Jupyter environment.
+
+### 4. View the Visual Dashboard
+Double-click the generated **`report.html`** file in your project directory to open a fully formatted dark-mode dashboard directly in your web browser.
 
 ---
 
@@ -62,21 +67,3 @@ Compares completion rates across different NGO categories.
 ### 3. Donation Share
 Breakdown of donation streams sponsoring student seats.
 ![Donor Summary](visualizations/donor_summary.png)
-
----
-
-## 📋 Generated Text Report
-When run, the script outputs a simple text report in [report.txt](report.txt). Below is a sample preview containing the trend forecasting results:
-
-```text
-NayePankh Foundation - Simple Data Analysis Report
-===================================================
-Total Beneficiaries: 1000
-Overall Completion Rate: 75.00%
-Total Funds Utilized: 9,738,450.00 INR
-Average Satisfaction Score: 3.01 / 5.0
-
-Advanced Analytical Insights:
-1. Enrollment levels have grown steadily from 2022 to 2025.
-2. 2026 Enrollment Projection (Linear regression fit): 278 expected students.
-```
