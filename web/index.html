@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NayePankh Foundation - Data Analytics Dashboard</title>
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <span class="logo-icon">🪶</span>
+                <div class="logo-text">
+                    <h2>NayePankh</h2>
+                    <p>FOUNDATION</p>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn active" data-target="overview-tab">
+                    <span class="btn-icon">📊</span> Executive Overview
+                </button>
+                <button class="nav-btn" data-target="programs-tab">
+                    <span class="btn-icon">🎓</span> Program Performance
+                </button>
+                <button class="nav-btn" data-target="finance-tab">
+                    <span class="btn-icon">💰</span> Financial Analytics
+                </button>
+                <button class="nav-btn" data-target="impact-tab">
+                    <span class="btn-icon">🌍</span> Impact Assessment
+                </button>
+                <button class="nav-btn" data-target="sql-tab">
+                    <span class="btn-icon">⚡</span> SQL Query Console
+                </button>
+                <button class="nav-btn" data-target="reports-tab">
+                    <span class="btn-icon">📰</span> Automated Reports
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Data Version: 2021-2025</p>
+                <p>Status: Live Operational Data</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1 id="page-title">Executive Overview</h1>
+                    <p id="page-subtitle">High-level operational metrics and growth trends</p>
+                </div>
+                <div class="header-actions">
+                    <div class="interactive-tag">
+                        <span class="pulse-indicator"></span>
+                        Live Interactive Dashboard
+                    </div>
+                </div>
+            </header>
+
+            <!-- TAB 1: EXECUTIVE OVERVIEW -->
+            <section id="overview-tab" class="tab-content active">
+                <div class="kpi-grid">
+                    <div class="kpi-card gradient-orange">
+                        <div class="kpi-info">
+                            <h3>Total Beneficiaries</h3>
+                            <span class="kpi-value" id="kpi-beneficiaries">-</span>
+                        </div>
+                        <span class="kpi-icon">👥</span>
+                    </div>
+                    <div class="kpi-card gradient-blue">
+                        <div class="kpi-info">
+                            <h3>Completion Rate</h3>
+                            <span class="kpi-value" id="kpi-completion">-</span>
+                        </div>
+                        <span class="kpi-icon">🎓</span>
+                    </div>
+                    <div class="kpi-card gradient-purple">
+                        <div class="kpi-info">
+                            <h3>Total Funds Utilized</h3>
+                            <span class="kpi-value" id="kpi-funds">-</span>
+                        </div>
+                        <span class="kpi-icon">💳</span>
+                    </div>
+                    <div class="kpi-card gradient-amber">
+                        <div class="kpi-info">
+                            <h3>Avg Satisfaction</h3>
+                            <span class="kpi-value" id="kpi-satisfaction">-</span>
+                        </div>
+                        <span class="kpi-icon">⭐️</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="chart-container span-2">
+                        <div class="chart-header">
+                            <h3>Beneficiary Growth Trend</h3>
+                            <p>Monthly cumulative program enrollments</p>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Program Category Shares</h3>
+                            <p>Distribution of enrolled students</p>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: PROGRAM PERFORMANCE -->
+            <section id="programs-tab" class="tab-content">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-info">
+                            <h3>Average Attendance</h3>
+                            <span class="kpi-value" id="kpi-attendance">-</span>
+                        </div>
+                        <span class="kpi-icon">📅</span>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-info">
+                            <h3>Total Volunteer Hours</h3>
+                            <span class="kpi-value" id="kpi-volunteers">-</span>
+                        </div>
+                        <span class="kpi-icon">🤝</span>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-info">
+                            <h3>Post-Training Jobs Secured</h3>
+                            <span class="kpi-value" id="kpi-jobs">-</span>
+                        </div>
+                        <span class="kpi-icon">💼</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="chart-container span-2">
+                        <div class="chart-header">
+                            <h3>State-wise Program Outlines</h3>
+                            <p>Completion vs Dropouts vs Ongoing cases</p>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="stateChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Vocational Employment Conversion</h3>
+                            <p>Secured livelihood outcomes for graduates</p>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="employmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: FINANCIAL ANALYTICS -->
+            <section id="finance-tab" class="tab-content">
+                <div class="dashboard-grid">
+                    <div class="chart-container span-2">
+                        <div class="chart-header">
+                            <h3>Funds Allocated vs Utilized</h3>
+                            <p>Budget efficiency overview by category</p>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="fundsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Donor Sponsorship Share</h3>
+                            <p>Contribution distribution by donor category</p>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="donorChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: IMPACT ASSESSMENT -->
+            <section id="impact-tab" class="tab-content">
+                <div class="dashboard-grid full-width">
+                    <div class="chart-container full-height">
+                        <div class="chart-header">
+                            <h3>Geographical & Regional Impact Metrics</h3>
+                            <p>Operations split across districts and states</p>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="data-table" id="impact-table">
+                                <thead>
+                                    <tr>
+                                        <th>State</th>
+                                        <th>Total Enrolled</th>
+                                        <th>Completion Rate</th>
+                                        <th>Completion Rank</th>
+                                        <th>Employment Success</th>
+                                        <th>Employment Rank</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: SQL QUERY CONSOLE -->
+            <section id="sql-tab" class="tab-content">
+                <div class="sql-console-grid">
+                    <div class="sql-selector-panel">
+                        <h3>Query Selection</h3>
+                        <p class="panel-desc">Select an audit query to run against SQLite database:</p>
+                        <div class="query-list" id="query-buttons-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="sql-execution-panel">
+                        <div class="sql-editor-header">
+                            <h3>SQL Query Editor</h3>
+                            <span class="badge">Read Only (SQLite Sandbox)</span>
+                        </div>
+                        <div class="sql-code-wrapper">
+                            <pre><code id="sql-code-block">-- Select a query to begin...</code></pre>
+                        </div>
+                        <button class="execute-btn" id="run-sql-btn">⚡ Execute Query</button>
+                        
+                        <div class="sql-results-wrapper">
+                            <div class="results-header">
+                                <h3>Execution Output</h3>
+                                <span class="status-indicator" id="sql-status">Ready</span>
+                            </div>
+                            <div class="table-container" id="sql-table-container">
+                                <p class="placeholder-text">Execute the query to view rows...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 6: AUTOMATED REPORTS -->
+            <section id="reports-tab" class="tab-content">
+                <div class="report-container-wrapper">
+                    <div class="report-actions-bar">
+                        <h3>Select Report Version</h3>
+                        <div class="dropdown-wrapper">
+                            <select id="report-select">
+                                <option value="q4-2025">Quarterly Report (Q4 2025) - [Automated]</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="report-sheet" id="report-body">
+                        <!-- Loaded and parsed dynamically -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>

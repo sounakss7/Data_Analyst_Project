@@ -1,0 +1,556 @@
+/* Global CSS Variables & Dark Mode Theme */
+:root {
+    --bg-dark: #12181F;
+    --bg-sidebar: #19222B;
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-primary: #FFFFFF;
+    --text-secondary: #9FAFC0;
+    --primary-color: #FF5722;
+    --primary-hover: #E64A19;
+    --secondary-color: #1E88E5;
+    --success-color: #4CAF50;
+    --warning-color: #FFC107;
+    --danger-color: #F44336;
+    --sidebar-width: 260px;
+    --header-height: 80px;
+    --font-family: 'Outfit', sans-serif;
+    --shadow-soft: 0px 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Layout Framework */
+.app-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    z-index: 10;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.logo-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 2px 8px rgba(255, 87, 34, 0.4));
+}
+
+.logo-text h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logo-text p {
+    font-size: 10px;
+    color: var(--text-secondary);
+    letter-spacing: 2.5px;
+    margin-top: -2px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-btn:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.nav-btn.active {
+    color: var(--text-primary);
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+}
+
+.sidebar-footer {
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Main Content Workspace */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Top Header Bar */
+.top-header {
+    height: var(--header-height);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    flex-shrink: 0;
+}
+
+.header-title h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.header-title p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.interactive-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(76, 175, 80, 0.08);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--success-color);
+}
+
+.pulse-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: var(--success-color);
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(0.9); opacity: 1; }
+}
+
+/* Tab Switching Control */
+.tab-content {
+    display: none;
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+    height: calc(100vh - var(--header-height));
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* KPI Card Grid */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    flex-shrink: 0;
+}
+
+.kpi-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+}
+
+.kpi-card.gradient-orange { background: linear-gradient(135deg, rgba(255, 87, 34, 0.15) 0%, rgba(255, 152, 0, 0.03) 100%); border-color: rgba(255, 87, 34, 0.25); }
+.kpi-card.gradient-blue { background: linear-gradient(135deg, rgba(30, 136, 229, 0.15) 0%, rgba(0, 188, 212, 0.03) 100%); border-color: rgba(30, 136, 229, 0.25); }
+.kpi-card.gradient-purple { background: linear-gradient(135deg, rgba(156, 39, 176, 0.15) 0%, rgba(233, 30, 99, 0.03) 100%); border-color: rgba(156, 39, 176, 0.25); }
+.kpi-card.gradient-amber { background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 143, 0, 0.03) 100%); border-color: rgba(255, 193, 7, 0.25); }
+
+.kpi-info h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.kpi-value {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.kpi-icon {
+    font-size: 32px;
+    opacity: 0.8;
+}
+
+/* Dashboard Visual Grids */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.dashboard-grid.full-width {
+    grid-template-columns: 1fr;
+}
+
+.chart-container {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 380px;
+}
+
+.chart-container.span-2 {
+    grid-column: span 2;
+}
+
+.chart-container.full-height {
+    min-height: 550px;
+}
+
+.chart-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.chart-header p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.chart-wrapper {
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+/* Data Tables inside Tabs */
+.table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+.data-table th {
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.data-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+/* SQL Query Sandbox Console */
+.sql-console-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+    height: calc(100vh - var(--header-height) - 80px);
+}
+
+.sql-selector-panel {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.panel-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.query-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+}
+
+.query-item-btn {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.query-item-btn:hover {
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.query-item-btn.active {
+    color: var(--text-primary);
+    border-color: var(--primary-color);
+    background-color: rgba(255, 87, 34, 0.05);
+}
+
+.sql-execution-panel {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+}
+
+.sql-editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.badge {
+    font-size: 11px;
+    background-color: rgba(30, 136, 229, 0.1);
+    color: var(--secondary-color);
+    border: 1px solid rgba(30, 136, 229, 0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.sql-code-wrapper {
+    background-color: #0A0F14;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    height: 180px;
+    overflow-y: auto;
+}
+
+.sql-code-wrapper code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    color: #4CAF50;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.execute-btn {
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--text-primary);
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: flex-end;
+    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+    transition: all 0.2s;
+}
+
+.execute-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.sql-results-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+}
+
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.status-indicator {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.table-container {
+    flex-grow: 1;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.placeholder-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Simulated database loader keyframes */
+.loader {
+    width: 28px;
+    height: 28px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    margin: auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Automated Report Viewport styling */
+.report-container-wrapper {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: calc(100vh - var(--header-height) - 80px);
+}
+
+.report-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.dropdown-wrapper select {
+    background-color: #19222B;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.report-sheet {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 16px;
+    line-height: 1.6;
+    color: #CBD5E1;
+}
+
+.report-sheet h1 { font-size: 24px; color: var(--text-primary); margin-bottom: 16px; }
+.report-sheet h2 { font-size: 18px; color: var(--text-primary); margin: 24px 0 12px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+.report-sheet h3 { font-size: 15px; color: var(--text-primary); margin: 16px 0 8px 0; }
+.report-sheet p { margin-bottom: 16px; font-size: 14px; }
+.report-sheet table { width: 100%; border-collapse: collapse; margin: 16px 0 24px 0; font-size: 13px; text-align: left; }
+.report-sheet th { padding: 12px; border-bottom: 2px solid var(--border-color); color: var(--text-primary); font-weight: 600; }
+.report-sheet td { padding: 12px; border-bottom: 1px solid var(--border-color); }
+.report-sheet ul { padding-left: 20px; margin-bottom: 16px; font-size: 14px; }
+.report-sheet li { margin-bottom: 8px; }
+.report-sheet strong { color: var(--text-primary); }
